@@ -1,41 +1,43 @@
 // 기본 타입
 // 숫자 타입으로 지정
-let num;
+let num:number;
 
 // 문자 타입으로 지정
-let str;
+let str:string;
 
 // 불리안 타입으로 지정
-let bool;
+let bool:boolean;
 
 // 섞인 타입
 // 숫자 배열 예) [1, 2, 3, 4, 5]
-let numArr;
+let numArr:number[];
 
 // 문자열 이중 배열 예) [['a', 'b', 'c'], ['d', 'e', 'f']]
-let strArr;
+let strArr:string[];
 
 // [숫자 문자열] 튜플 배열 예) [[1, 'a'], [2, 'b'], [3, 'c']]
-let T1T2;
+let T1T2:[number, string];
 
 // [숫자배열 문자배열]의 튜플 예) [[1, 2, 3, 4, 5], ['a', 'b', 'c']]
-let T12;
+let T12:[[number],[string]];
 
 // 태그
 // id가 container인 div태그 받아오기
-let div;
+let div = document.querySelector('div#container');
 
 // class가 c1인 p태그 받아오기
-let p;
+let p = document.querySelector('p.c1');
 
 // data-id가 active인 td 태그 모두 받아오기
-let tds;
+let tds = document.querySelectorAll('td[data-id=active]');
 
 // data-id에 ch라는 글자가 포함된 tr 태그 모두 받아오기
-let tr;
+let tr = document.querySelectorAll('tr[data-id=ch]');
 
 // 숫자, 문자, 불리안을 순서대로 받고, return 값이 없음
-let fun1;
+let fun1 = function(num:number,str:string,bool:boolean){
+
+};
 
 // click 이벤트에 들어가는 함수
 function fun2(){}
@@ -45,13 +47,27 @@ window.onclick = fun2;
 // 코드까지 작성해주세요.
 // 문자열을 모두 이중배열로 만드는 map 메소드
 // ['abc', 'de', 'fghi'] 의 결과는 [['a', 'b', 'c'], ['d', 'e'], ['f', 'g', 'h', 'i']]
-let fun3;
+let fun3 = function(strArr:[string]){
+    let arr = [];
+    for(let i of strArr){
+        arr.push(i.split(''));
+    }
+    return arr;
+};
 
 
 // 코드까지 작성해주세요.
 // 모든 타입의 이중 배열을 단일 배열로 만드는 reduce
 // [['a', 1, 'c'], ['d', 2], ['f', 3, 'h', true]] 의 결과는 ['a', 1, 'c', 'd', 2, 'f', 3, 'h', true]
-let fun4;
+let fun4 = function(doubleArr:any[][]){
+    let arr = [];
+    for(let i of doubleArr){
+        for(let j of i){
+            arr.push(j);
+        }
+    }
+    return arr;
+}
 
 
 let a:any;

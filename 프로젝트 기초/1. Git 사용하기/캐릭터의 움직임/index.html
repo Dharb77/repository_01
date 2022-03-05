@@ -39,7 +39,7 @@
                 // e.repeat는 반복된 이벤트인지 아닌지를 확인한다.
                 // 그 전에 눌렀던 키들을 전부 초기화 후 누른 키의 down 속성만 1로
                 // 코드 작성
-                for(let i in key){
+                for(let i of Object.keys(key)){
                     key[i].down = 0;
                 }
                 key[e.key].down = 1;
@@ -50,7 +50,7 @@
             // e.key 값이 key 오브젝트에 존재할 때만 코드 실행
             // e.key 값의 key 오브젝트의 down 값을 0으로
             // 코드 작성
-            if(Object.keys(key).includes(e.key)){
+            if(key.hasOwnProperty(e.key)){
                 key[e.key].down = 0;
             }
         };
@@ -67,7 +67,7 @@
             height:76
         };
 
-        const main = () => {
+        const main = e => {
             // 코드 작성
             // 어떤 키를 누르고 있는지를 확인한다.
             // 키는 위의 결과에 따라 무조건 한 방향만 누른 것으로 처리된다.
@@ -80,46 +80,40 @@
             // 키를 누른 방향으로 움직이게 한다. 하지만 움직일 때는 무조건 transform을 쓴다.
             // sprite도 계속 바뀌게 한다.
             // 단 화면을 벗어나면 안된다.
-            pika.frame.y = null;
-            let downed = null;
-            for(let [keys, value] of Object.entries(key)){
-                if(value.down === 1){
-                    downed = keys;
-                    pika.frame.y = value.sprite;
-                }
-            }
-            if(downed = null){
-                pika.cnt = 0;
-            }else{
-                if(pika.cnt === pika.speed){
-                    if(pika.frame.x < 3){
+
+            for(let i of Object.keys(key)){
+                if(key[i].down === 1){
+                    pika.frame.y = key[i].sprite;
+                    if(pika.cnt === pika.speed){
                         pika.frame.x += 1;
                         pika.cnt = 0;
+                    }else{
+                        pika.cnt += 1;
                     }
-                }else{
-                    pika.cnt += 1;
+
+                    if(pika.frame.x > 3){
+                        pika.frame.x = 0;
+                    }
+
+                    pika.tag.style.backgroundPosition = `calc(100% / 3 * ${pika.frame.x}) calc(100% / 3 * ${pika.frame.y})`;
+
+                    if(pika.frame.y === 0){
+                        pika.y += 4;
+                    }else if(pika.frame.y === 1){
+                        pika.x -= 4;
+                    }else if(pika.frame.y === 2){
+                        pika.x += 4;
+                    }else if(pika.frame.y === 3){
+                        pika.y -= 4;
+                    }
+
+                    pika.tag.style.transform = `translate(${pika.x}px, ${pika.y}px)`;
                 }
-                if(pika.frame.y === 0){
-                    if(pika.y < window.innerHeight - 128){
-                        pika.y += pika.frame.x;
-                    }
-                }else if(pika.frame.y === 1){
-                    if(pika.x > 0){
-                        pika.x -= pika.frame.x;
-                    }
-                }else if(pika.frame.y === 2){
-                    if(pika.x < window.innerWidth - 128){
-                        pika.x += pika.frame.x;
-                    }
-                }else if(pika.frame.y === 3){
-                    if(pika.y > 0){
-                        pika.y -= pika.frame.x;
-                    }
-                }
-                pika.tag.style.transform = `translate(${pika.x}px,${pika.y}px)`;
             }
+            
             requestAnimationFrame(main);
         };
+
         main();
     </script>
 </body>
