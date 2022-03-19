@@ -71,37 +71,21 @@
 
         let speed = 5
 
-        const random = () => {
-            let ranNum = Math.floor(Math.random() * 255);
-            return ranNum;
-        }
-
         const createBall = () => {
             for(let way of ways){
                 const div = document.createElement('div');
-                const ball = {
-                    tag: div,
-                    color: `rgb(${random()},${random()},${random()})`,
-                    start: {x: way[0]*100, y: way[1]*100}
-                } // 객체 정보 추가
+                const ball = {} // 객체 정보 추가
                 // div도 ball 객체에 속성으로 추가하기
-                balls.push(ball);
             }
             render();
         }
 
         const render = () => {
             // balls를 렌더링하는 함수
-            for(let i of balls){
-                i.tag.classList.add('ball');
-                i.tag.style.backgroundColor = i.color;
-                con.appendChild(i.tag);
-            }
         };
 
         const speedUpdate = (d) => {
             // speed 를 d 만큼 증가
-            speed += d;
             cur.innerHTML = speed.toFixed(1);
         };
 
@@ -110,15 +94,7 @@
 
         con.onclick = (e) => {
             // 속도 조절
-            speedUpdate(Number(e.target.dataset.d));
-        }
-
-        const main = () => {
-            for(let i of balls){
-                i.tag.style.transform = 
-            }
-            requestAnimationFrame(main);
-        }
+        };
     </script>
 </body>
 </html>

@@ -109,17 +109,8 @@
                 // 색은 랜덤하게
                 // bars 에는 key가 i, value는 {div, num} 이 있도록 한다.
                 // div는 태그, num은 나온 횟수이다.
-                let bars = {
-                    color: `rgb(${random(255)}, ${random(255)}, ${random(255)})`,
-                    key: i,
-                    value: {div, num}
-                }
             }
         };
-
-        const random = (max) => {
-            return Math.floor(Math.random * max);
-        }
 
         // dice를 추가한다.
         const addDice = () => {
@@ -131,10 +122,6 @@
             
             // imgContainer에 추가하는 코드
             // dices에 추가하는 코드
-            const img = document.createElement('img');
-            img.src = './img/dice.png';
-            imgContainer.appendChild(img);
-            dices.push(random(6));
             
             update();
         };
@@ -143,22 +130,17 @@
         const deleteDice = () => {
             // dices에서 제거하는 코드
             // imgContainer에서 제거하는 코드
-            dices.pop();
-            
         };
 
         const render = () => {
             if(dices.length){
                 let total = 0;
                 // dices를 순회하며 dice에 랜덤한 수를 입력하고, 그것에 따라서 div의 backgroundImagePosition을 바꾼다.
-                for(let i of dices){
-                    i = random(6);
-                    div.style.backgroundImagePosition = 
-                }
+
                 // dice를 나온 숫자에따라 정렬한다.
-                dices.sort();
+                
                 // 정렬한 div로 다시 appendChild 한다.
-                div.appendChild();
+
                 // dice 눈의 숫자를 더한 값을 bars의 total key와 같은 값의 객체를 찾아 num을 1 증가한다.
 
                 // 만약 방금 증가한 값이 graph.max보다 크면 graph.max를 업데이트한다.
@@ -166,7 +148,6 @@
                 // graph.bars 를 순회하며 높이를 업데이트 한다.
 
                 // 높이는 (100% - 50px) * num / max + 50px 이다.
-                bars[value][div].style.height = '(100% - 50px) * num / max + 50px';
             }
             requestAnimationFrame(render);
         };
