@@ -76,7 +76,6 @@ class MusicPlayer implements iMusicPlayer{
 
         list.addEventListener('click', e => {
             // 적절한 tr 태그를 찾은 후 this.select를 호출한다.
-            
         });
 
         range.addEventListener('input', e => {
