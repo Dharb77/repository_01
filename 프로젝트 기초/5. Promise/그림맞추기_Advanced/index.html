@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./dist/index.js" type="module" defer></script>
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #puzzle-container{
+            border: 5px solid black;
+            box-sizing: content-box;
+        }
+
+        #answer, #puzzle-container{
+            vertical-align: middle;
+            width:600px;
+            height: 600px;
+            flex-wrap: wrap;
+            display: inline-flex;
+        }
+
+        #answer{
+            background-image: url(./img/logo.png);
+            background-size: 100% 100%;
+        }
+
+        .puzzle{
+            position: relative;
+            background-image: url(./img/logo.png);
+            border: 2px solid black;
+            z-index: 2;
+        }
+
+        .puzzle.none{
+            border: none;
+            z-index: 1;
+            background-image: none;
+        }
+
+        .puzzle::after {
+            content: "";
+            position:absolute;
+            left:-1px;
+            top:-1px;
+            width:calc(100% + 2px);
+            height: calc(100% + 2px);
+            background-color: gray;
+            transition: filter 0.5s;
+            filter:opacity(0%);
+        }
+
+        .puzzle.none::after{
+            background-color: transparent;
+        }
+
+        .puzzle:hover::after{
+            filter:opacity(40%);
+        }
+
+        h1::before{
+            content: "그림을 맞춰주세요.";
+        }
+
+        h1.clear::before{
+            content: "그림을 맞췄습니다!!!";
+            background-color: red;
+            color: white;
+        }
+        button::before{
+            content: "셔플";
+            font-size: 25px;
+        }
+        button.shuffle::before{
+            content: "그만하기";
+        }
+    </style>
+</head>
+
+<body>
+    <h1></h1>
+    <button></button><br>
+    <div id="puzzle-container"></div>
+    <div id="answer"></div>
+</body>
+
+</html>

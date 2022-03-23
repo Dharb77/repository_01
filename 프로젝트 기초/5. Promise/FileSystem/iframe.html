@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+
+        body > *:not(audio){
+            border:none;
+            width:100vw;
+            height: 100vh;
+        }
+
+        body:not(.audio) > audio,
+        body:not(.video) > video,
+        body:not(.image) > img,
+        body:not(.text) > iframe{
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <audio src="" controls></audio>
+    <video src="" controls></video>
+    <img src="" alt="">
+    <iframe></iframe>
+    <script>
+        const pars = new URLSearchParams(location.search);
+        const type = pars.get('type');
+        document.body.classList.add(type);
+
+        if(type === 'audio'){
+            document.querySelector('audio').src = pars.get('src');
+        } else if(type === 'video'){
+            document.querySelector('video').src = pars.get('src');
+        } else if(type === 'image'){
+            document.querySelector('img').src = pars.get('src');
+        } else {
+            document.querySelector('iframe').src = pars.get('src');
+        }
+    </script>
+</body>
+</html>
