@@ -11,6 +11,7 @@ const makeEvent = (num:number, tag:HTMLElement, fun:Fun) => {
     // num 횟수만큼의 이벤트 실행후 tag 제거
     // num을 다른 곳에 할당하거나 기록하지 않는다!!!
     tag.addEventListener('click', fun);
+    tag.removeEventListener('click', fun);
 };
 
 but.addEventListener('click', e => {
@@ -18,7 +19,10 @@ but.addEventListener('click', e => {
         // inp.value을 makeEvent에 인자로
         // 버튼을 makeEvent의 생성 후 con에 할당
         const btn = document.createElement('button');
-        makeEvent(Number(inp.value), btn, () => {});
+        makeEvent(Number(inp.value), btn, () => {
+            alert(inp.value);
+        });
+        btn.innerHTML = '버튼';
         con.appendChild(btn);
     }
 });

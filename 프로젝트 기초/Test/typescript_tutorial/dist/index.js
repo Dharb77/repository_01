@@ -1,6 +1,6 @@
 "use strict";
-let str = 'Hello World';
-console.log(str);
-let num = 30;
-console.log(str);
+const file = document.querySelector('input');
+file?.addEventListener('input', e => {
+    console.log(file.files);
+});
 //# sourceMappingURL=index.js.map
