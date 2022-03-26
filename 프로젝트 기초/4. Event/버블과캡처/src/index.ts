@@ -7,6 +7,9 @@ const isLeaf = (e:MouseEvent) => {
     // 캡처링 동작
     // 만약 leaf (마지막)을 선택하지 않은 경우에는 동작하지 않고 error 클래스가 발생하도록 한다.
     // leaf인지 아닌지 아는 방법은 count와 eventPhase를 이용한다.
+    let cur = e.currentTarget as HTMLDivElement;
+    let tar = e.target as HTMLDivElement;
+    
 };
 
 const fun = (e:MouseEvent) => {
@@ -14,6 +17,13 @@ const fun = (e:MouseEvent) => {
     // dataset의 num을 버블링에 따라 1씩 증가시킨다
     // innerHTML을 사용하지 않아도 dataset.num의 값만 바꾸면 숫자가 자동으로 보인다.
     // sel을 추가했다가 바로 제거 (setTimeout을 사용)해서 애니메이션 효과를 준다.
+    let cur = e.currentTarget as HTMLDivElement;
+    let tar = e.target as HTMLDivElement;
+    cur.dataset.num = `${Number(cur.dataset.num) + 1}`;
+    cur.classList.add('sel');
+    setTimeout(() => {
+        cur.classList.remove('sel');
+    }, 0);
 };
 
 while(true){
@@ -23,7 +33,22 @@ while(true){
     // 모든 node는 fun을 버블링 이벤트로, isLeaf를 캡처링 이벤트로 갖는다
     // 만약 nodes에 더 이상 node들이 검색되지 않으면 while을 빠져나온다.
     // count 는 빠져나오기 전의 i 값으로 한다.
-    break;
+    let find = Array.from(document.querySelectorAll<HTMLDivElement>('#con' + '> .node'.repeat(i + 1)));
+    if(find.length === 0){
+        count = i;
+        break;
+    }else{
+        for(let n = 0; n < find.length; n++){
+            find[n].style.left = `${left * (1 + -2 * (n % 2))}vw`;
+            find[n].dataset.num = '0';
+        }
+        left = left / 2;
+        i++;
+    }
+    let nodes = document.querySelectorAll('.node');
+    nodes.forEach((v:HTMLDivElement, i:number) => {
+        v.addEventListener('click', fun);
+    });
 }
 
 root.style.setProperty('--top', `calc((100vh - 50px) / ${count - 1})`);
