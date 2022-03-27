@@ -1,5 +1,5 @@
-let str = 'Hello World';
-console.log(str);
+const file = document.querySelector<HTMLInputElement>('input');
 
-let num = 30;
-console.log(str);
+file?.addEventListener('input', e => {
+    console.log(file.files);
+})

@@ -39,13 +39,17 @@ class MusicPlayer implements iMusicPlayer{
         // range는 시간 조절
         // time은 시간
         // button은 음악 추가 버튼
+        this.list = list;
+        this.range = range;
+        this.time = time;
+        this.button = button;
 
         // 아래 코드 작성을 위해서 해당 링크를 찾아볼 것!!!
         // https://developer.mozilla.org/ko/docs/Web/HTML/Element/audio
             
 
         audio.addEventListener('canplaythrough', e => {
-            // 이 때는 audio.duration 을 사용해서 range의 max 값을 바꾼다.
+            // 이 때는 audio.duration 을 사용해서 range의 max 값을 바꾼다. O
             range.max = String(audio.duration);
         });
 
@@ -75,13 +79,13 @@ class MusicPlayer implements iMusicPlayer{
         });
 
         range.addEventListener('input', e => {
-            // 음악 시간을 range.value로 맞춘다.
-            // currentTime을 잘 사용
+            // 음악 시간을 range.value로 맞춘다. O
+            // currentTime을 잘 사용 O
             audio.currentTime = Number(range.value);
         });
 
         const play = () => {
-            // 시간과 range.value를 음악 시간에 맞춘다.
+            // 시간과 range.value를 음악 시간에 맞춘다. O
             time.innerHTML = String(audio.currentTime.toFixed(2));
             range.value = String(audio.currentTime.toFixed(2));
             requestAnimationFrame(play);
