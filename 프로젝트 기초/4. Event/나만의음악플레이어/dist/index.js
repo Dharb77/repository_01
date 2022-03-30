@@ -9,7 +9,12 @@ class MusicPlayer {
     cur;
     constructor({ list, range, time, button }) {
         const audio = this.audio;
+        this.list = list;
+        this.range = range;
+        this.time = time;
+        this.button = button;
         audio.addEventListener('canplaythrough', e => {
+            range.max = String(audio.duration);
         });
         audio.addEventListener('ended', e => {
         });
@@ -25,8 +30,11 @@ class MusicPlayer {
         list.addEventListener('click', e => {
         });
         range.addEventListener('input', e => {
+            audio.currentTime = Number(range.value);
         });
         const play = () => {
+            time.innerHTML = String(audio.currentTime.toFixed(2));
+            range.value = String(audio.currentTime.toFixed(2));
             requestAnimationFrame(play);
         };
         play();
@@ -43,6 +51,7 @@ class MusicPlayer {
         };
     }
     select(tar) {
+        console.log(this.get);
     }
     get(id) {
     }
