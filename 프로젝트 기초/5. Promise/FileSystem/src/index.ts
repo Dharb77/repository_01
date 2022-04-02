@@ -24,6 +24,7 @@ async function openFolder(dir:FileSystemDirectoryHandle, par:HTMLElement){
 
     // 참고 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/for-await...of
     for await (let [name, file] of dir){
+
         /*
             !!!문제 1번!!!
             하나의 div를 만들고 dataset.type에 받은 file.kind를 할당한다.
